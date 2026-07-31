@@ -2,7 +2,6 @@ import streamlit as st
 import os
 from agents import CampusNavigatorAgents
 
-# Page Configuration
 st.set_page_config(
     page_title="Lanka Campus Navigator", 
     page_icon="🎓", 
@@ -12,7 +11,6 @@ st.set_page_config(
 st.title("🎓 Lanka Campus Navigator")
 st.subheader("UGC Admission, Z-Score Eligibility & Career Guidance Multi-Agent System")
 
-# Retrieve API Key from Streamlit Secrets or Environment Variables
 groq_api_key = st.secrets.get("GROQ_API_KEY", os.getenv("GROQ_API_KEY", ""))
 
 @st.cache_resource
@@ -21,7 +19,6 @@ def load_navigator(api_key: str):
 
 navigator = load_navigator(groq_api_key)
 
-# Sidebar Configuration
 st.sidebar.header("⚙️ System Configuration")
 
 if not groq_api_key:
@@ -41,10 +38,9 @@ st.sidebar.info(
     "- **Vector Store:** ChromaDB with FastEmbed"
 )
 
-# User Query Input
 user_query = st.text_input(
     "Enter your question regarding UGC Cut-off marks, Universities, or Career options:",
-    placeholder="e.g., කැලණිය Software Engineering එකට ඕන Z-Score එක කීයද? / What is the cutoff for Moratuwa Engineering?"
+    placeholder="e.g., කැලණිය Software Engineering එකට ඕන Z-Score එක කීයද?"
 )
 
 if st.button("Submit Query", type="primary"):
