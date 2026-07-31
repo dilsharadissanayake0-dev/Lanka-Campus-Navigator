@@ -1,2 +1,15 @@
-# Lanka-Campus-Navigator
-LankaCampus Navigator is an intelligent web application designed to help Sri Lankan G.C.E. Advanced Level students identify suitable state university degree programmes based on their Z-Score, A/L stream, and district.
+# 🎓 Lanka Campus Navigator
+
+**Lanka Campus Navigator** is an Agentic AI application designed for Sri Lankan G.C.E. A/L students and undergraduates. It offers intelligent UGC admission eligibility checks, Z-score analysis, and career guidance using a Multi-Agent architecture backed by Retrieval-Augmented Generation (RAG).
+
+---
+
+## 🏗️ Architecture & Design Patterns
+
+The application demonstrates **3 core Agentic AI Design Patterns**:
+
+1. **Router Pattern**: Classifies incoming queries into `eligibility` or `career` intents to route tasks efficiently.
+2. **Tool-Use / ReAct Pattern**: Retrieves verified domain knowledge from a **ChromaDB Vector Database** containing Sri Lankan UGC guidelines.
+3. **Reflection / Self-Critique Pattern**: Analyzes draft outputs before presenting the final response to ensure factual correctness and adherence to UGC guidelines.
+
+### 🔄 Agent-to-Agent (A2A) Communication Flow
