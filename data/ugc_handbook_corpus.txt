@@ -1,0 +1,30 @@
+
+    University Grants Commission (UGC) Sri Lanka - Admission & Cut-off Guidelines
+
+    1. Engineering Stream:
+    - University of Moratuwa (Engineering): Minimum Z-Score 1.95 (Colombo/Gampaha).
+    - University of Peradeniya (Engineering): Minimum Z-Score 1.85.
+    - University of Ruhuna (Engineering): Minimum Z-Score 1.72.
+    - University of Jaffna (Engineering): Minimum Z-Score 1.68.
+    - Career Pathways: Software Engineer, Civil Engineer, Electronics Specialist, Mechatronics Engineer.
+
+    2. Biological Science & Medicine Stream:
+    - Faculty of Medicine (University of Colombo): Minimum Z-Score 2.10.
+    - Faculty of Medicine (University of Sri Jayewardenepura): Minimum Z-Score 2.02.
+    - Faculty of Medicine (University of Peradeniya): Minimum Z-Score 1.98.
+    - Faculty of Medicine (University of Ruhuna): Minimum Z-Score 1.90.
+    - Career Pathways: Medical Officer, Biomedical Scientist, Healthcare Administrator, Pharmacologist.
+
+    3. Physical Science & Computing Stream:
+    - University of Colombo (Computer Science - BCS): Minimum Z-Score 1.55.
+    - University of Kelaniya (Software Engineering): Minimum Z-Score 1.45.
+    - University of Sri Jayewardenepura (Applied Sciences): Minimum Z-Score 1.30.
+    - University of Moratuwa (Information Technology - IT): Minimum Z-Score 1.60.
+    - Career Pathways: Data Scientist, Full-Stack Developer, AI Researcher, Cybersecurity Specialist.
+
+    4. Management & Commerce Stream:
+    - University of Sri Jayewardenepura (Management/Finance): Minimum Z-Score 1.65.
+    - University of Colombo (Business Administration): Minimum Z-Score 1.60.
+    - University of Kelaniya (Commerce): Minimum Z-Score 1.40.
+    - Career Pathways: Business Analyst, Financial Analyst, Marketing Executive, HR Manager.
+    
