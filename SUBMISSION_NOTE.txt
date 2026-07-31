@@ -1,2 +1,0 @@
-Project fully verified against IT41043 rubric. All features live and working.
-Submitted via LMS.
