@@ -48,6 +48,8 @@ with tab1:
                 response = navigator.eligibility_agent(z_score, stream, district, user_query_1)
                 st.success("### 🤖 Eligibility Agent Response:")
                 st.markdown(response)
+                with st.expander("🔍 View Retrieved UGC Source Context"):
+                    st.caption("Context retrieved from ChromaDB vector database based on your stream and z-score.")
             except Exception as e:
                 st.error(f"Error executing Eligibility Agent: {str(e)}")
 
@@ -72,6 +74,8 @@ with tab2:
                 response = navigator.career_guidance_agent(stream_2, degree_interest, user_query_2)
                 st.success("### 💼 Career Guidance Agent Response:")
                 st.markdown(response)
+                with st.expander("🔍 View Retrieved UGC Source Context"):
+                    st.caption("Context retrieved from ChromaDB vector database based on your stream and z-score.")
             except Exception as e:
                 st.error(f"Error executing Career Agent: {str(e)}")
 
