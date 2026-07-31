@@ -15,6 +15,14 @@ def load_navigator(api_key: str):
 
 navigator = load_navigator(groq_api_key)
 
+
+# Sidebar System Status
+st.sidebar.title("⚙️ System Status")
+st.sidebar.success("● ChromaDB Vector Store: Active")
+st.sidebar.info("● LLM Provider: Groq API")
+st.sidebar.caption("Selected Models: Llama-3.1-8B (Fast) & Llama-3.3-70B (Deep)")
+st.sidebar.markdown("---")
+
 tab1, tab2 = st.tabs(["🎯 Agent 1: Admission & Eligibility Check", "💼 Agent 2: Career Guidance"])
 
 # -------------------------------------------------------------
