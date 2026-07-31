@@ -35,43 +35,37 @@ with tab1:
     user_query_1 = st.text_input("Specific Admission Query (Optional):", value="Which campuses can I apply for and are there any aptitude tests?")
 
     if st.button("Check Eligibility", type="primary"):
-        if not groq_api_key:
-            st.error("GROQ_API_KEY is missing. Please add it to Streamlit Secrets.")
-        else:
-            with st.spinner("Agent 1 (Eligibility Agent) is querying UGC database..."):
-                try:
-                    response = navigator.eligibility_agent(z_score, stream, district, user_query_1)
-                    st.success("### 🤖 Eligibility Agent Response:")
-                    st.markdown(response)
-                except Exception as e:
-                    st.error(f"Error executing Eligibility Agent: {str(e)}")
+        with st.spinner("Agent 1 (Eligibility Agent) is analyzing UGC database..."):
+            try:
+                response = navigator.eligibility_agent(z_score, stream, district, user_query_1)
+                st.success("### 🤖 Eligibility Agent Response:")
+                st.markdown(response)
+            except Exception as e:
+                st.error(f"Error executing Eligibility Agent: {str(e)}")
 
 # -------------------------------------------------------------
 # TAB 2: AGENT 2 - CAREER GUIDANCE AGENT
 # -------------------------------------------------------------
 with tab2:
     st.header("Undergraduate Career Counselor")
-    st.write("Explore future career pathways and job prospects based on your academic stream and degree options.")
+    st.write("Explore future career pathways and job prospects based on your academic stream.")
     
     col_a, col_b = st.columns(2)
     with col_a:
         stream_2 = st.selectbox("Your Stream:", ["Arts", "Physical Science / Maths", "Biological Science", "Commerce", "Technology"], key="career_stream")
     with col_b:
-        degree_interest = st.text_input("Degree Interest / Summary:", value="Arts / Humanities / Social Sciences")
+        degree_interest = st.text_input("Degree Interest / Subject Area:", value="Physical Science / Computing")
 
-    user_query_2 = st.text_input("Career Question:", value="What are the top job roles and career prospects for this degree stream?")
+    user_query_2 = st.text_input("Career Question:", value="What are the top job roles and career prospects for this stream?")
 
     if st.button("Get Career Guidance", type="primary"):
-        if not groq_api_key:
-            st.error("GROQ_API_KEY is missing. Please add it to Streamlit Secrets.")
-        else:
-            with st.spinner("Agent 2 (Career Agent) is generating career pathways..."):
-                try:
-                    response = navigator.career_guidance_agent(stream_2, degree_interest, user_query_2)
-                    st.success("### 💼 Career Guidance Agent Response:")
-                    st.markdown(response)
-                except Exception as e:
-                    st.error(f"Error executing Career Guidance Agent: {str(e)}")
+        with st.spinner("Agent 2 (Career Agent) is generating career pathways..."):
+            try:
+                response = navigator.career_guidance_agent(stream_2, degree_interest, user_query_2)
+                st.success("### 💼 Career Guidance Agent Response:")
+                st.markdown(response)
+            except Exception as e:
+                st.error(f"Error executing Career Agent: {str(e)}")
 
 st.markdown("---")
 st.caption("Lanka Campus Navigator | Powered by Groq LLMs, ChromaDB Vector Store & Multi-Agent Architecture.")
