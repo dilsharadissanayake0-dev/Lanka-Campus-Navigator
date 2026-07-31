@@ -76,4 +76,12 @@ with tab2:
                 st.error(f"Error executing Career Agent: {str(e)}")
 
 st.markdown("---")
+
+# User Feedback Component
+st.sidebar.markdown("---")
+st.sidebar.subheader("💬 Feedback")
+feedback = st.sidebar.text_area("How was your experience?")
+if st.sidebar.button("Submit Feedback"):
+    st.sidebar.success("Thank you for your feedback!")
+
 st.caption("Lanka Campus Navigator | Powered by Groq LLMs, ChromaDB Vector Store & Multi-Agent Architecture.")
