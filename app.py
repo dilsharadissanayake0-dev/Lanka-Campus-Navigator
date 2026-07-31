@@ -2,14 +2,10 @@ import streamlit as st
 import os
 from agents import CampusNavigatorAgents
 
-st.set_page_config(
-    page_title="Lanka Campus Navigator", 
-    page_icon="🎓", 
-    layout="wide"
-)
+st.set_page_config(page_title="Lanka Campus Navigator", page_icon="🎓", layout="wide")
 
 st.title("🎓 Lanka Campus Navigator")
-st.subheader("UGC Admission, Z-Score Eligibility & Career Guidance Multi-Agent System")
+st.write("Sri Lankan UGC Campus Admission Eligibility & Career Guidance Multi-Agent System")
 
 groq_api_key = st.secrets.get("GROQ_API_KEY", os.getenv("GROQ_API_KEY", ""))
 
@@ -19,47 +15,52 @@ def load_navigator(api_key: str):
 
 navigator = load_navigator(groq_api_key)
 
-st.sidebar.header("⚙️ System Configuration")
+# Clean Tab Architecture for 2 Dedicated Agents
+tab1, tab2 = st.tabs(["🎯 Agent 1: Admission & Eligibility Check", "💼 Agent 2: Career Guidance"])
 
-if not groq_api_key:
-    groq_api_key = st.sidebar.text_input("Enter Groq API Key:", type="password")
+# -------------------------------------------------------------
+# TAB 1: AGENT 1 - ELIGIBILITY AGENT
+# -------------------------------------------------------------
+with tab1:
+    st.header("UGC Campus Eligibility & Aptitude Test Checker")
+    st.write("Enter your G.C.E. A/L details below to check eligible universities and required aptitude tests.")
+    
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        z_score = st.text_input("Z-Score:", value="1.80")
+    with col2:
+        stream = st.selectbox("A/L Stream:", ["Arts", "Physical Science / Maths", "Biological Science", "Commerce", "Technology"])
+    with col3:
+        district = st.text_input("District:", value="Kandy")
 
-agent_mode = st.sidebar.radio(
-    "Select Agent Execution Mode:",
-    ["Auto Router", "Eligibility Agent", "Career Guidance Agent"]
-)
+    user_query_1 = st.text_input("Specific Admission Query (Optional):", value="Which campuses can I apply for and are there any aptitude tests?")
 
-st.sidebar.markdown("---")
-st.sidebar.info(
-    "**System Architecture:**\n"
-    "- **Router Agent:** Groq Llama-3.1-8B (Fast classification)\n"
-    "- **Execution Agent:** Groq Llama-3.3-70B (Deep reasoning & RAG retrieval)\n"
-    "- **Reflection Agent:** Quality assurance & verification\n"
-    "- **Vector Store:** ChromaDB with FastEmbed"
-)
+    if st.button("Check Eligibility", type="primary"):
+        with st.spinner("Agent 1 (Eligibility Agent) is analyzing UGC cutoff databases..."):
+            response = navigator.eligibility_agent(z_score, stream, district, user_query_1)
+            st.success("### 🤖 Eligibility Agent Response:")
+            st.markdown(response)
 
-user_query = st.text_input(
-    "Enter your question regarding UGC Cut-off marks, Universities, or Career options:",
-    placeholder="e.g., කැලණිය Software Engineering එකට ඕන Z-Score එක කීයද?"
-)
+# -------------------------------------------------------------
+# TAB 2: AGENT 2 - CAREER GUIDANCE AGENT
+# -------------------------------------------------------------
+with tab2:
+    st.header("Undergraduate Career Counselor")
+    st.write("Explore future career pathways and job prospects based on your academic stream.")
+    
+    col_a, col_b = st.columns(2)
+    with col_a:
+        stream_2 = st.selectbox("Your Stream:", ["Arts", "Physical Science / Maths", "Biological Science", "Commerce", "Technology"], key="career_stream")
+    with col_b:
+        degree_interest = st.text_input("Degree Interest / Subject Area:", value="Psychology / Economics / IT")
 
-if st.button("Submit Query", type="primary"):
-    if not user_query.strip():
-        st.warning("Please enter a valid query.")
-    else:
-        with st.spinner("Processing query via Multi-Agent AI System..."):
-            mode_mapping = {
-                "Auto Router": "Auto",
-                "Eligibility Agent": "Eligibility Agent",
-                "Career Guidance Agent": "Career Guidance Agent"
-            }
-            selected_mode = mode_mapping[agent_mode]
-            try:
-                response = navigator.process_query(user_query, mode=selected_mode)
-                st.markdown("### 🤖 Agentic Response:")
-                st.success(response)
-            except Exception as e:
-                st.error(f"Error processing request: {str(e)}")
+    user_query_2 = st.text_input("Career Question:", value="What are the top job roles and career prospects for this degree?")
+
+    if st.button("Get Career Guidance", type="primary"):
+        with st.spinner("Agent 2 (Career Agent) is generating career pathway insights..."):
+            response = navigator.career_guidance_agent(stream_2, degree_interest, user_query_2)
+            st.success("### 💼 Career Guidance Agent Response:")
+            st.markdown(response)
 
 st.markdown("---")
-st.caption("Powered by RAG Architecture, ChromaDB, Groq Multi-Models & Multi-Agent Orchestration.")
+st.caption("Lanka Campus Navigator | Powered by Groq LLMs, ChromaDB Vector Store & Multi-Agent Architecture.")

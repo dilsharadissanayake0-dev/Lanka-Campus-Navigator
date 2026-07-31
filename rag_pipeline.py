@@ -7,57 +7,52 @@ from langchain_community.embeddings import FastEmbedEmbeddings
 def initialize_rag_corpus():
     os.makedirs("data", exist_ok=True)
     
-    # Domain-Specific UGC Handbook Knowledge Base Corpus (Sinhala & English)
+    # Detailed English Dataset for UGC Admission & Career Pathways
     ugc_data = """
-    University Grants Commission (UGC) Sri Lanka - Admission & Cut-off Guidelines
+    OFFICIAL UGC SRI LANKA ADMISSION & CAREER GUIDELINE CORPUS
 
-    1. Engineering Stream:
-    - University of Moratuwa (Engineering): Minimum Z-Score 1.95 (Colombo/Gampaha).
-    - University of Peradeniya (Engineering): Minimum Z-Score 1.85.
-    - University of Ruhuna (Engineering): Minimum Z-Score 1.72.
-    - University of Jaffna (Engineering): Minimum Z-Score 1.68.
-    - Career Pathways: Software Engineer, Civil Engineer, Electronics Specialist, Mechatronics Engineer.
+    1. ENGINEERING STREAM (Cut-offs & Eligibility):
+    - Moratuwa Engineering: Z-score ~ 1.95 (Colombo/Gampaha), 1.88 (Kandy/Galle). Requires Aptitude Test for Architecture/Design.
+    - Peradeniya Engineering: Z-score ~ 1.85.
+    - Ruhuna Engineering: Z-score ~ 1.72.
+    - Aptitude Tests: Moratuwa Architecture, Fashion Design, IT & Management require university-level Aptitude Tests.
 
-    2. Biological Science & Medicine Stream:
-    - Faculty of Medicine (University of Colombo): Minimum Z-Score 2.10.
-    - Faculty of Medicine (University of Sri Jayewardenepura): Minimum Z-Score 2.02.
-    - Faculty of Medicine (University of Peradeniya): Minimum Z-Score 1.98.
-    - Faculty of Medicine (University of Ruhuna): Minimum Z-Score 1.90.
-    - Career Pathways: Medical Officer, Biomedical Scientist, Healthcare Administrator, Pharmacologist.
+    2. PHYSICAL SCIENCE & COMPUTING STREAM:
+    - University of Colombo (Computer Science - BCS): Z-score ~ 1.55. Requires Computing Aptitude Test.
+    - University of Kelaniya (Software Engineering): Z-score ~ 1.45. Requires Software Engineering Aptitude Test.
+    - University of Moratuwa (Information Technology - IT): Z-score ~ 1.60.
+    - Career Pathways: Software Engineer, Data Scientist, Full-Stack Developer, AI Engineer, Cybersecurity Analyst.
 
-    3. Physical Science & Computing Stream:
-    - University of Colombo (Computer Science - BCS): Minimum Z-Score 1.55.
-    - University of Kelaniya (Software Engineering): Minimum Z-Score 1.45.
-    - University of Sri Jayewardenepura (Applied Sciences): Minimum Z-Score 1.30.
-    - University of Moratuwa (Information Technology - IT): Minimum Z-Score 1.60.
-    - Career Pathways: Data Scientist, Full-Stack Developer, AI Researcher, Cybersecurity Specialist.
+    3. ARTS & HUMANITIES STREAM:
+    - University of Colombo (Arts/International Relations): Z-score ~ 1.40 (Kandy/Colombo).
+    - University of Sri Jayewardenepura (Humanities/Social Sciences): Z-score ~ 1.30.
+    - University of Peradeniya (Arts/Psychology/Economics): Z-score ~ 1.25.
+    - Aptitude Tests: Translation Studies (Kelaniya/Jaffna), Mass Communication (Kelaniya), Visual Arts/Music require practical aptitude evaluations.
+    - Career Pathways: Civil Services Officer, Lecturer/Academic, Economist, Psychologist, Diplomat, Content Strategist, Public Relations Specialist.
 
-    4. Management & Commerce Stream:
-    - University of Sri Jayewardenepura (Management/Finance): Minimum Z-Score 1.65.
-    - University of Colombo (Business Administration): Minimum Z-Score 1.60.
-    - University of Kelaniya (Commerce): Minimum Z-Score 1.40.
-    - Career Pathways: Business Analyst, Financial Analyst, Marketing Executive, HR Manager.
+    4. COMMERCE & MANAGEMENT STREAM:
+    - Sri Jayewardenepura Management: Z-score ~ 1.65.
+    - Colombo Business Administration: Z-score ~ 1.60.
+    - Career Pathways: Financial Analyst, Business Analyst, Marketing Manager, HR Executive, Auditor.
     """
 
     corpus_path = "data/ugc_handbook_corpus.txt"
     with open(corpus_path, "w", encoding="utf-8") as f:
         f.write(ugc_data)
 
-    # Document Loading & Chunking Strategy
     loader = TextLoader(corpus_path, encoding="utf-8")
     documents = loader.load()
 
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=300, chunk_overlap=50)
     chunks = text_splitter.split_documents(documents)
 
-    # FastEmbed Embeddings & ChromaDB Vector Store Persistence
     embeddings = FastEmbedEmbeddings()
     vector_store = Chroma.from_documents(
         documents=chunks,
         embedding=embeddings,
         persist_directory="./chroma_db"
     )
-    print("[SUCCESS] ChromaDB Vector Store successfully initialized!")
+    print("[SUCCESS] ChromaDB successfully re-initialized with English Corpus!")
     return vector_store
 
 if __name__ == "__main__":
