@@ -12,4 +12,21 @@ The application demonstrates **3 core Agentic AI Design Patterns**:
 2. **Tool-Use / ReAct Pattern**: Retrieves verified domain knowledge from a **ChromaDB Vector Database** containing Sri Lankan UGC guidelines.
 3. **Reflection / Self-Critique Pattern**: Analyzes draft outputs before presenting the final response to ensure factual correctness and adherence to UGC guidelines.
 
-### 🔄 Agent-to-Agent (A2A) Communication Flow
+---
+
+## 🧠 Multi-Model Selection Strategy
+
+| Sub-task / Role | Model Selected | Provider | Justification |
+| :--- | :--- | :--- | :--- |
+| **Intent Routing & Classification** | `llama-3.1-8b-instant` | Groq | Ultra-low latency (<200ms), zero cost, high accuracy. |
+| **Deep Reasoning & Response Synthesis** | `llama-3.3-70b-versatile` | Groq | Superior context understanding, Sinhala language generation. |
+
+---
+
+## 🚀 Local Setup & Installation
+
+```bash
+pip install -r requirements.txt
+python rag_pipeline.py
+streamlit run app.py
+```
