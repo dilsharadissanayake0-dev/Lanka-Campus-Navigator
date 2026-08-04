@@ -15,6 +15,12 @@
 This application uses a Retrieval-Augmented Generation (RAG) pipeline over official UGC Handbooks alongside a multi-agent workflow to automate eligibility checks and provide personalized career guidance.
 
 ---
+🔗 Links
+🚀 Live Application:
+https://lanka-campus-navigator-k4lgnpss9qkkt7wfpgwpgj.streamlit.app/
+
+📁 GitHub Repository:
+https://github.com/dilsharadissanayake0-dev/Lanka-Campus-Navigator.git
 
 # 🏗️ System Architecture & Workflow
 
